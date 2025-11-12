@@ -7,7 +7,7 @@ let currentStartIndex = 1;
 const allPostsLimit = 50;
 const batchSize = 10;
 
-const productpostsElement = document.getElementById("product-posts");
+const productpostsElement = document.getElementById("edu-posts");
 const loadMoreButton = document.getElementById("load-more");
 const loaderElement = document.getElementById("loader");
 
