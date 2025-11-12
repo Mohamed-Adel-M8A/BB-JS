@@ -20,7 +20,7 @@ function getPostTitle(post) {
  * 🖼️ الصورة
  ***********************/
 function getPostImage(post, size = 320) {
-  const defaultImage = `https://via.placeholder.com/${size}x${size}/f0f0f0/333333.png?text=No+Image`;
+  const defaultImage = `https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1QJS8OFnjWt6t4kjlRP1Xtmqv5lHe-JyF76kk2hGBojvpdkyDQLdgReJQ5Bs6DUAQWYWFryVyd9TSkJ6I10ewLMvpg16ngpy6TWEYFjLiAv1LzXeylcunrzQRXN5lO8046NkoOj88nj1Mow4MnxN9wyGwz0cHAG2oE5prP8SK3JdiYotAvhdzCkiFj509/w640-h640/unnamed.jpg`;
   const content = post.content?.$t || "";
   const imgMatch = content.match(/<img[^>]+src=["']([^"']+)["']/i);
 
