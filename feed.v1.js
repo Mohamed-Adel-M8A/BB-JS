@@ -28,31 +28,28 @@ function fetchAllPosts() {
   loaderElement.style.display = "block";
   loadMoreButton.style.display = "none";
 
-  const cached = sessionStorage.getItem("cachedPosts");
-  if (cached) {
-    const parsed = JSON.parse(cached);
-    allPosts = parsed;
-    productFeed = computeProductFeed(allPosts);
-    displayPointer = 0;
-    displayBatch();
-    loaderElement.style.display = "none";
-    return;
-  }
-
   const url = `https://bit-brains.blogspot.com/feeds/posts/default?alt=json&start-index=${currentStartIndex}&max-results=${allPostsLimit}`;
 
   fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
       const posts = data.feed.entry || [];
+      
       allPosts = allPosts.concat(posts);
-
-      sessionStorage.setItem("cachedPosts", JSON.stringify(allPosts));
-
+      
       productFeed = computeProductFeed(allPosts);
       displayPointer = 0;
       displayBatch();
+      
       currentStartIndex += allPostsLimit;
+    })
+    .catch(error => {
+        console.error("Fetch Error:", error);
     })
     .finally(() => {
       loaderElement.style.display = "none";
