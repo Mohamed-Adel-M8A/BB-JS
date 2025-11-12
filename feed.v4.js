@@ -1,5 +1,5 @@
 let allPosts = [];
-let productFeed = [];
+let eduFeed = [];
 let displayedPosts = new Set();
 let displayPointer = 0;
 
@@ -7,15 +7,13 @@ let currentStartIndex = 1;
 const allPostsLimit = 50;
 const batchSize = 10;
 
-const productpostsElement = document.getElementById("edu-posts");
+const edupostsElement = document.getElementById("edu-posts");
 const loadMoreButton = document.getElementById("load-more");
 const loaderElement = document.getElementById("loader");
-
-
 /***********************
  * جلب وترتيب المنشورات
  ***********************/
-function computeProductFeed(posts) {
+function computeeduFeed(posts) {
   return posts.sort(
     (a, b) => new Date(b.published.$t) - new Date(a.published.$t)
   );
@@ -42,7 +40,7 @@ function fetchAllPosts() {
       
       allPosts = allPosts.concat(posts);
       
-      productFeed = computeProductFeed(allPosts);
+      eduFeed = computeeduFeed(allPosts);
       displayPointer = 0;
       displayBatch();
       
@@ -63,8 +61,8 @@ function displayBatch() {
   const batch = [];
   let count = 0;
 
-  while (count < batchSize && displayPointer < productFeed.length) {
-    const post = productFeed[displayPointer];
+  while (count < batchSize && displayPointer < eduFeed.length) {
+    const post = eduFeed[displayPointer];
     const url = getPostUrl(post);
 
     if (url && !displayedPosts.has(url)) {
@@ -76,7 +74,7 @@ function displayBatch() {
   }
 
   if (batch.length > 0) {
-    productpostsElement.insertAdjacentHTML("beforeend", batch.join(""));
+    edupostsElement.insertAdjacentHTML("beforeend", batch.join(""));
     sessionStorage.setItem("displayedPosts", JSON.stringify([...displayedPosts]));
     lazyLoadImages(); // مهم للصور
   }
@@ -98,7 +96,7 @@ if (loadMoreButton) {
  ***********************/
 window.addEventListener("scroll", function () {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
-    if (displayPointer < productFeed.length) {
+    if (displayPointer < eduFeed.length) {
       displayBatch();
     } else {
       if (loadMoreButton) loadMoreButton.style.display = "block";
