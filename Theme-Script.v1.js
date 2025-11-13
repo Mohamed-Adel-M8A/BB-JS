@@ -100,3 +100,35 @@ function setupTOCToggle() {
 }
 
 document.addEventListener('DOMContentLoaded', generateAndInsertTOC);
+
+
+// النسخ
+
+
+    function copyJson() {
+        const jsonContentElement = document.querySelector('#jsonContent .json-data-to-copy');
+        
+        if (!jsonContentElement) {
+            console.error("العنصر '.json-data-to-copy' غير موجود ضمن '#jsonContent'.");
+            return;
+        }
+        
+        const jsonText = jsonContentElement.innerText;
+        
+        const button = document.querySelector('button.copy-btn'); 
+        const originalText = button ? button.innerText : "نسخ الكود";
+
+        navigator.clipboard.writeText(jsonText).then(function() {
+            if (button) {
+                button.innerText = "تم النسخ!";
+                setTimeout(() => { button.innerText = originalText; }, 2000); 
+            } else {
+                alert("تم نسخ الكود بنجاح!");
+            }
+        }, function(err) {
+            console.error("فشل في نسخ النص: ", err);
+            alert("فشل في النسخ. يرجى محاولة النسخ اليدوي.");
+        });
+    }
+
+
