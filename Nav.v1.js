@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
         const categories = [
-    { name: 'معالجات ومتحكمات' },
+    { name: 'معالجات و متحكمات' },
     { name: 'SQL (لغة استعلام هيكلية)' },
     { name: 'فيجوال بيزك (Visual Basic)' },
     { name: 'مكونات وترقية الحاسب' },
